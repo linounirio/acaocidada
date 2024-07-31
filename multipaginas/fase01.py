@@ -91,6 +91,7 @@ def tutores():
             st.plotly_chart(fig_c)
         with tab3:
             c_ctab_n = pd.crosstab(carioca_df[var_c_x],carioca_df[var_c_y], normalize=True)*100
+            #c_ctab_n.style.background_gradient(cmap='coolwarm').format(precision=2)
             st.title("Tabela de relativa (%)")
             st.table(c_ctab_n)
             if min(c_ctab.min())>4:
@@ -176,28 +177,28 @@ def tutores():
             st.plotly_chart(fig_r)
 
         with tab3:
-            c_ctab_n = pd.crosstab(carioca_df[var_c_x],carioca_df[var_c_y], normalize=True)*100
+            r_ctab_n = pd.crosstab(rio01_df[var_r_x],rio01_df[var_r_y], normalize=True)*100
             st.title("Tabela de relativa (%)")
-            st.table(c_ctab_n)
-            if min(c_ctab.min())>4:
+            st.table(r_ctab_n)
+            if min(r_ctab.min())>4:
                 if float(res.pvalue) > 0.05:
                     st.markdown("---")
                     st.markdown("### As variáveis escolhidas não são *Associadas*.")
                     st.write("pvalue:", round(float(res.pvalue),3))
-                    st.table(c_ctab)
+                    st.table(r_ctab)
                 else:
                     st.markdown("---")
                     st.markdown("### As variáveis escolhidas são *dependentes*")
                     st.write("pvalue:", round(float(res.pvalue),3))
-                    st.table(c_ctab)
-            elif min(c_ctab.min())<5:
+                    st.table(r_ctab)
+            elif min(r_ctab.min())<5:
                 st.markdown("---")
                 st.markdown(
                     """ As Variáveis escolhidas possuem
                     *Células* com valores menores que 5
                     não sendo possível realizar o teste de hipótese
                     escolhido.""")
-                st.table(c_ctab)
+                st.table(r_ctab)
                 
 def agendamento():
     import openpyxl as xl
